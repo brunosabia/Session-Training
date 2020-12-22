@@ -26,6 +26,7 @@ namespace SessionTraining.Controllers
         {
             User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
             //return View();
+
             return View(await _context.User.ToListAsync());
         }
 
