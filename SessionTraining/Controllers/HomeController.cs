@@ -23,8 +23,8 @@ namespace SessionTraining.Controllers
 
         public IActionResult Index()
         {
-            var user = new User() { UserId = 1, Username = "Teste1" };
-            HttpContext.Session.SetString("SessionUser",JsonConvert.SerializeObject(user));
+            var user = new User() { UserId = 50, Username = "Teste1" };
+            HttpContext.Session.SetString("SessionUser", JsonConvert.SerializeObject(user));
             return View();
         }
 

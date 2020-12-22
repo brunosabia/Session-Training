@@ -28,11 +28,12 @@ namespace SessionTraining
             services.AddControllersWithViews();
 
             services.AddSession(o => {
-                o.IdleTimeout = TimeSpan.FromSeconds(1800); 
+                o.IdleTimeout = TimeSpan.FromSeconds(10); 
             });
 
-            services.AddDbContextPool<SessionTrainingContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SessionTrainingContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),builder 
+                    => builder.MigrationsAssembly("SessionTraining")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SessionTraining.Data;
 using SessionTraining.Models.Entities;
 
@@ -22,6 +24,8 @@ namespace SessionTraining.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
+            //return View();
             return View(await _context.User.ToListAsync());
         }
 
