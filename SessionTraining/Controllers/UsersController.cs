@@ -154,5 +154,15 @@ namespace SessionTraining.Controllers
         {
             return _context.User.Any(e => e.UserId == id);
         }
+
+
+        // GET: Users/Hello/5
+        public async Task<IActionResult> Hello()
+        {
+            User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
+            return View(sessionUser);
+
+            //return View(await _context.User.ToListAsync());
+        }
     }
 }
