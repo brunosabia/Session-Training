@@ -28,7 +28,7 @@ namespace SessionTraining
             services.AddControllersWithViews();
 
             services.AddSession(o => {
-                o.IdleTimeout = TimeSpan.FromSeconds(10); 
+                o.IdleTimeout = TimeSpan.FromSeconds(1800); 
             });
 
             services.AddDbContext<SessionTrainingContext>(options =>
