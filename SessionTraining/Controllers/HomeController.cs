@@ -21,6 +21,8 @@ namespace SessionTraining.Controllers
             _logger = logger;
         }
 
+        //talvez tentar passar o user que vai setar o Session user como parametro
+        //procurar como fazer a autenticação com o session.
         public IActionResult Index()
         {
             var user = new User() { UserId = 50, Username = "Teste1" };
