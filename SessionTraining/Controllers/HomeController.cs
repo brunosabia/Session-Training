@@ -33,6 +33,23 @@ namespace SessionTraining.Controllers
             return View();
         }
 
+        /*
+         * 
+         [HttpGet]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index([Bind("Username,Password")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
+        */
+
+
         public IActionResult Privacy()
         {
             return View();
