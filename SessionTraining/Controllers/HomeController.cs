@@ -21,6 +21,22 @@ namespace SessionTraining.Controllers
             _logger = logger;
         }
 
+        //adding data to session
+        //assuming the method below will return list of Products
+
+        //var products = Db.GetProducts();
+
+        //Store the products to a session
+
+        //Session["products"]=products;
+
+        //To get what you have stored to a session
+
+        //var products = Session["products"] as List<Product>;
+
+        //to clear the session value
+
+        //Session["products"]=null;
 
         //talvez tentar passar o user que vai setar o Session user como parametro
 
@@ -60,5 +76,7 @@ namespace SessionTraining.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        
     }
 }

@@ -164,5 +164,21 @@ namespace SessionTraining.Controllers
 
             //return View(await _context.User.ToListAsync());
         }
+
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Authenticate([Bind("Username,Password")] User user)
+        {
+            User user1 = null;
+            if (user != null)
+            {
+                user1 = await _context.User
+               .FirstOrDefaultAsync(m => m.Username == user.Username && m.Password == user.Password);
+            }
+            return View(user1);
+        }
+
+
     }
 }
