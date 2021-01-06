@@ -157,7 +157,7 @@ namespace SessionTraining.Controllers
 
 
         // GET: Users/Hello/5
-        public async Task<IActionResult> Hello()
+        public IActionResult Hello()
         {
             User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
             return View(sessionUser);
@@ -168,13 +168,15 @@ namespace SessionTraining.Controllers
 
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Authenticate([Bind("Username,Password")] User user)
+        public async Task<IActionResult> Authenticate(User user)
         {
             User user1 = null;
             if (user != null)
             {
                 user1 = await _context.User
-               .FirstOrDefaultAsync(m => m.Username == user.Username && m.Password == user.Password);
+               .FirstOrDefaultAsync(m => m.Username == user.Username);
+                HttpContext.Session.SetString("SessionUser", JsonConvert.SerializeObject(user1));
+                
             }
             return View(user1);
         }

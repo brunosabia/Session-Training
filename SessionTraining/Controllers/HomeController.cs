@@ -48,22 +48,18 @@ namespace SessionTraining.Controllers
             HttpContext.Session.SetString("SessionUser", JsonConvert.SerializeObject(user));
             return View();
         }
-
-        /*
-         * 
-         [HttpGet]
+        
+        /*[HttpGet]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index([Bind("Username,Password")] User user)
         {
-            if (ModelState.IsValid)
-            {
-                
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+
+           HttpContext.Session.SetString("SessionUser", JsonConvert.SerializeObject(user));
+
             return View(user);
         }
         */
+      
 
 
         public IActionResult Privacy()

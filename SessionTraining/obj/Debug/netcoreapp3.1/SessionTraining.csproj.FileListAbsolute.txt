@@ -177,3 +177,4 @@ C:\Users\bruno\source\repos\SessionTraining\SessionTraining\bin\Debug\netcoreapp
 C:\Users\bruno\source\repos\SessionTraining\SessionTraining\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\bruno\source\repos\SessionTraining\SessionTraining\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
 C:\Users\bruno\source\repos\SessionTraining\SessionTraining\obj\Debug\netcoreapp3.1\Razor\Views\Users\Hello.cshtml.g.cs
+C:\Users\bruno\source\repos\SessionTraining\SessionTraining\obj\Debug\netcoreapp3.1\Razor\Views\Users\Authenticate.cshtml.g.cs
