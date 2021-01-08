@@ -9,12 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SessionTraining.Data;
 using SessionTraining.Models.Entities;
+using SessionTraining.Services;
 
 namespace SessionTraining.Controllers
 {
     public class UsersController : Controller
     {
         private readonly SessionTrainingContext _context;
+
+        public LoginService LoginService;
 
         public UsersController(SessionTrainingContext context)
         {
@@ -26,7 +29,6 @@ namespace SessionTraining.Controllers
         {
             User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
             //return View();
-
             return View(await _context.User.ToListAsync());
         }
 
@@ -159,26 +161,40 @@ namespace SessionTraining.Controllers
         // GET: Users/Hello/5
         public IActionResult Hello()
         {
-            User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
-            return View(sessionUser);
-
+            if (HttpContext.Session.GetString("OpenSession") != null)
+            {
+                User sessionUser = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("SessionUser"));
+                return View(sessionUser);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
             //return View(await _context.User.ToListAsync());
         }
 
 
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Authenticate(User user)
+
+        //Authentication Attempt
+
+        public IActionResult Authenticate()
         {
-            User user1 = null;
-            if (user != null)
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Authenticate([Bind("Username")] User user)
+        {
+            User us = await LoginService.AuthenticationAsync(user);
+             if (us != null)
             {
-                user1 = await _context.User
-               .FirstOrDefaultAsync(m => m.Username == user.Username);
-                HttpContext.Session.SetString("SessionUser", JsonConvert.SerializeObject(user1));
-                
+                UserSession session = new UserSession(user);
+                HttpContext.Session.SetString("OpenSession", JsonConvert.SerializeObject(session));
+                return RedirectToAction("Hello");
             }
-            return View(user1);
+            
+            return View();
         }
 
 
