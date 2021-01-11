@@ -26,9 +26,12 @@ namespace SessionTraining
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
 
             services.AddSession(o => {
-                o.IdleTimeout = TimeSpan.FromSeconds(1800); 
+                o.IdleTimeout = TimeSpan.FromSeconds(1800);
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
             });
 
             services.AddDbContext<SessionTrainingContext>(options =>
@@ -54,8 +57,11 @@ namespace SessionTraining
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
